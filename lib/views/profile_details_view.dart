@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:movie_mania/controllers/profile_details_controller.dart';
 
 class ProfileDetailsView extends StatelessWidget {
