@@ -1,4 +1,4 @@
-# movie_mania
+# MovieMania
 
 - Egy NodeJs RestAPI-ra épülő komplex Flutter mobilprojekt.
 - A projektben GetX állapotkezelőt használunk.
