@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/components/profile_picture.dart';
 import 'package:movie_mania/controllers/profile_details_controller.dart';
 
 class ProfileDetailsView extends StatelessWidget {
@@ -25,31 +26,11 @@ class ProfileDetailsView extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      GestureDetector(
+                      ProfilePicture(
+                        url: controller.profilePictureSource,
                         onTap: () {
                           print("katt");
                         },
-                        child: Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(controller.profilePictureSource),
-                              radius: 100,
-                            ),
-                            Container(
-                              height: 50,
-                              width: 50,
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(50)),
-                            )
-                          ],
-                        ),
                       ),
                       SizedBox(
                         height: 30,

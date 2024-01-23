@@ -39,7 +39,6 @@ class NewSeriesView extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Column(
-                //  ,  Icon(Icons.movie)
                 children: [
                   CustomTextField(
                     controller: controller.titleController,

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
+import 'package:movie_mania/components/profile_picture.dart';
 import 'package:movie_mania/controllers/first_view_controller.dart';
 
 class FirstView extends StatelessWidget {
@@ -50,9 +51,7 @@ class FirstView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    SizedBox(height: 15),
                     Expanded(
                       child: TabBarView(children: [
                         Column(
@@ -78,17 +77,90 @@ class FirstView extends StatelessWidget {
                               checkColor: Colors.white,
                               isRadio: true,
                               data: ["Stay logged"],
+                              selectedList: ["Stay logged"],
                               onChanged: (p0) {
                                 if (p0 != null) {
-                                  print(true);
+                                  controller.setLoggedTrue();
                                 } else {
-                                  print(false);
+                                  controller.setLoggedFalse();
                                 }
                               },
                             ),
                           ],
                         ),
-                        Center(child: Text("2")),
+                        SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 30),
+                            child: Column(
+                              children: [
+                                ProfilePicture(
+                                  url: controller.profilePictureSource,
+                                  onTap: () {
+                                    print("katt");
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                CustomTextField(
+                                  controller: controller.regEmailController,
+                                  prefixIcon: Icon(Icons.mail, size: 18),
+                                  labelText: "Email",
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  isPassword: false,
+                                ),
+                                CustomTextField(
+                                  controller: controller.regPwdController,
+                                  prefixIcon: Icon(Icons.lock, size: 18),
+                                  labelText: "Password",
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  isPassword: true,
+                                ),
+                                CustomTextField(
+                                  controller: controller.regPwd2Controller,
+                                  prefixIcon: Icon(Icons.lock, size: 18),
+                                  labelText: "Password again",
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  isPassword: true,
+                                ),
+                                CustomTextField(
+                                  controller: controller.regUsernameController,
+                                  prefixIcon: Icon(Icons.person, size: 18),
+                                  labelText: "Username",
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  isPassword: false,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal: 20,
+                                  ),
+                                  child: ListTile(
+                                    leading: Text("BirthDate",
+                                        style: TextStyle(fontSize: 20)),
+                                    trailing: Icon(Icons.date_range),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 200,
+                                  child: CupertinoDatePicker(
+                                    initialDateTime: DateTime.now(),
+                                    mode: CupertinoDatePickerMode.date,
+                                    dateOrder: DatePickerDateOrder.ymd,
+                                    use24hFormat: true,
+                                    onDateTimeChanged: (date) {
+                                      controller.setNewDate(date);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ]),
                     ),
                   ],
