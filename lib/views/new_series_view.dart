@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/controllers/details_view_controller.dart';
 import 'package:movie_mania/controllers/edit_details_view_controller.dart';
 import 'package:movie_mania/controllers/new_series_view_controller.dart';
@@ -38,31 +39,14 @@ class NewSeriesView extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Column(
+                //  ,  Icon(Icons.movie)
                 children: [
-                  Padding(
+                  CustomTextField(
+                    controller: controller.titleController,
+                    prefixIcon: Icon(Icons.movie, size: 18),
+                    labelText: "Name",
                     padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-                    child: TextField(
-                      controller: controller.titleController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.movie),
-                        prefixIconColor: Colors.grey,
-                        labelText: "Name",
-                        labelStyle: TextStyle(color: Colors.white),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
+                    isPassword: false,
                   ),
                   Padding(
                     padding: EdgeInsets.all(20),

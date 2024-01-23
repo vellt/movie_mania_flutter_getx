@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/controllers/home_view_controller.dart';
 import 'package:movie_mania/controllers/search_view_controller.dart';
 
@@ -27,32 +28,15 @@ class SearchView extends StatelessWidget {
                     )),
               ],
               bottom: PreferredSize(
-                  preferredSize: Size(double.infinity, 60),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: controller.searchController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        prefixIconColor: Colors.grey,
-                        labelText: "Type some words..",
-                        labelStyle: TextStyle(color: Colors.white),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )),
+                preferredSize: Size(double.infinity, 60),
+                child: CustomTextField(
+                  controller: controller.searchController,
+                  prefixIcon: Icon(Icons.search, size: 18),
+                  labelText: "Type some words..",
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  isPassword: false,
+                ),
+              ),
             ),
             body: Center(
               child: Column(
