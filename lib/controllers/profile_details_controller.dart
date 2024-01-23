@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProfileDetailsController extends GetxController {
@@ -7,4 +8,6 @@ class ProfileDetailsController extends GetxController {
   String email = "admin@admin.com";
   DateTime date = DateTime.now();
   String role = "Admin";
+
+  TextEditingController userNameController = TextEditingController();
 }
