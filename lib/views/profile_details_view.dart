@@ -35,192 +35,47 @@ class ProfileDetailsView extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 54, 54, 54),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Username",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(controller.userName,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ],
-                          ),
-                          trailing: IconButton(
+                      CustomListTile(
+                          prefixIcon: Icons.person,
+                          mainTitle: "Username",
+                          subTitle: "@JohnDoe",
+                          iconButton: IconButton(
                             icon: Icon(
                               Icons.edit,
                               color: Colors.blue,
                             ),
                             onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Icon(
-                              Icons.mail,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 54, 54, 54),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Email",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(controller.email,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Icon(
-                              Icons.date_range_outlined,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 54, 54, 54),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Birth Date",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(controller.date.toString().split(" ")[0],
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ],
-                          ),
-                          trailing: IconButton(
+                          )),
+                      CustomListTile(
+                          prefixIcon: Icons.mail,
+                          mainTitle: "Email",
+                          subTitle: "admin@admin.com"),
+                      CustomListTile(
+                          prefixIcon: Icons.date_range,
+                          mainTitle: "Birth Date",
+                          subTitle: "2024-01-23",
+                          iconButton: IconButton(
                             icon: Icon(
                               Icons.edit,
                               color: Colors.blue,
                             ),
                             onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Icon(
-                              Icons.lock,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 54, 54, 54),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Password",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text("************",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ],
-                          ),
-                          trailing: IconButton(
+                          )),
+                      CustomListTile(
+                          prefixIcon: Icons.lock,
+                          mainTitle: "Password",
+                          subTitle: "*************",
+                          iconButton: IconButton(
                             icon: Icon(
                               Icons.edit,
                               color: Colors.blue,
                             ),
                             onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 50,
-                            width: 50,
-                            child: Icon(
-                              Icons.accessibility,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 54, 54, 54),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Role",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(controller.role,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ],
-                          ),
-                        ),
-                      ),
+                          )),
+                      CustomListTile(
+                          prefixIcon: Icons.accessibility,
+                          mainTitle: "Role",
+                          subTitle: "Admin"),
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Container(
@@ -247,5 +102,55 @@ class ProfileDetailsView extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  const CustomListTile({
+    super.key,
+    required this.prefixIcon,
+    required this.mainTitle,
+    required this.subTitle,
+    this.iconButton,
+  });
+
+  final IconData prefixIcon;
+  final String mainTitle;
+  final String subTitle;
+  final Widget? iconButton;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(
+            prefixIcon,
+            color: Colors.white,
+          ),
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 54, 54, 54),
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              mainTitle,
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Text(subTitle, style: TextStyle(color: Colors.grey, fontSize: 14)),
+          ],
+        ),
+        trailing: iconButton,
+      ),
+    );
   }
 }

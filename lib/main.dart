@@ -12,6 +12,6 @@ void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData.dark(),
-    home: FirstView(),
+    home: ProfileDetailsView(),
   ));
 }
