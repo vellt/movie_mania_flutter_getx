@@ -11,9 +11,4 @@
 - áttervezett login/registration
 
 
-
-![Képernyőkép 2024-01-22 190656](https://github.com/vellt/movie_mania_flutter_getx/assets/61885011/78048493-d056-4ff8-8e58-2e5c3510ff02)
-![Képernyőkép 2024-01-22 190645](https://github.com/vellt/movie_mania_flutter_getx/assets/61885011/ac3b0174-3fef-4289-a000-4dd38c1e4d6d)
-
-![Képernyőkép 2024-01-22 190621](https://github.com/vellt/movie_mania_flutter_getx/assets/61885011/7a6a6039-9988-44fb-8fee-26226dce4242)
-
+![Képernyőkép 2024-01-23 180600](https://github.com/vellt/movie_mania_flutter_getx/assets/61885011/3b498160-4ae5-4995-8828-e450e703a2cd)
