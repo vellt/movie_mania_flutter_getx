@@ -10,6 +10,6 @@ import 'package:movie_mania/views/search_view.dart';
 void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    home: ProfileDetailsView(),
+    home: EditDetailsView(),
   ));
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,30 +39,12 @@ class EditDetailsView extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
+                  CustomTextField(
+                    controller: controller.titleController,
+                    isPassword: false,
+                    labelText: "Name",
                     padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-                    child: TextField(
-                      controller: controller.titleController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.movie),
-                        prefixIconColor: Colors.grey,
-                        labelText: "Name",
-                        labelStyle: TextStyle(color: Colors.white),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
+                    prefixIcon: Icon(Icons.movie, size: 18),
                   ),
                   Padding(
                     padding: EdgeInsets.all(20),
@@ -72,9 +56,13 @@ class EditDetailsView extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(15), // lekerekítés
-                            child: Image.network(
-                              controller.coverImage,
-                              fit: BoxFit.cover,
+                            child: ImageFiltered(
+                              imageFilter:
+                                  ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                              child: Image.network(
+                                controller.coverImage,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -140,5 +128,56 @@ class EditDetailsView extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.prefixIcon,
+    required this.labelText,
+    required this.padding,
+    required this.isPassword,
+  });
+  final Widget prefixIcon;
+  final String labelText;
+  final EdgeInsets padding;
+  final TextEditingController controller;
+  final bool isPassword;
+// EdgeInsets.only(top: 20, right: 20, left: 20)
+// Icon(Icons.movie)
+// "Name"
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: TextField(
+        obscureText: isPassword,
+        controller: controller,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: prefixIcon,
+          ),
+          prefixIconColor: Colors.grey,
+          labelText: labelText,
+          labelStyle: TextStyle(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: Colors.grey,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
