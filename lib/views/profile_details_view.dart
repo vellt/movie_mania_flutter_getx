@@ -33,7 +33,24 @@ class ProfileDetailsView extends StatelessWidget {
                       ProfilePicture(
                         url: controller.profilePictureSource,
                         onTap: () {
-                          print("katt");
+                          Get.bottomSheet(CustomBottomSheet(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: ProfilePicture(
+                                  url: controller.profilePictureSource,
+                                  onTap: () {},
+                                ),
+                              ),
+                              CustomButton(
+                                background: Colors.blue,
+                                text: "Save Changes",
+                                onPressed: () {
+                                  print("hello");
+                                },
+                              ),
+                            ],
+                          ));
                         },
                       ),
                       SizedBox(
@@ -55,7 +72,8 @@ class ProfileDetailsView extends StatelessWidget {
                                     controller: controller.userNameController,
                                     prefixIcon: Icon(Icons.person, size: 18),
                                     labelText: "Username",
-                                    padding: EdgeInsets.all(20),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
                                     isPassword: false,
                                   ),
                                   CustomButton(
@@ -82,7 +100,33 @@ class ProfileDetailsView extends StatelessWidget {
                               Icons.edit,
                               color: Colors.blue,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.bottomSheet(
+                                CustomBottomSheet(
+                                  children: [
+                                    SizedBox(
+                                      height: 200,
+                                      child: CupertinoDatePicker(
+                                        initialDateTime: DateTime.now(),
+                                        mode: CupertinoDatePickerMode.date,
+                                        dateOrder: DatePickerDateOrder.ymd,
+                                        use24hFormat: true,
+                                        onDateTimeChanged: (date) {
+                                          // controller.setNewDate(date);
+                                        },
+                                      ),
+                                    ),
+                                    CustomButton(
+                                      background: Colors.blue,
+                                      text: "Save Changes",
+                                      onPressed: () {
+                                        print("hello");
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           )),
                       CustomListTile(
                           prefixIcon: Icons.lock,
@@ -99,25 +143,34 @@ class ProfileDetailsView extends StatelessWidget {
                                   CustomTextField(
                                     controller:
                                         controller.oldPasswordController,
-                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "Current Password",
-                                    padding: EdgeInsets.all(20),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
                                     isPassword: true,
                                   ),
                                   CustomTextField(
                                     controller:
                                         controller.newPasswordController,
-                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password",
-                                    padding: EdgeInsets.all(20),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
                                     isPassword: true,
                                   ),
                                   CustomTextField(
                                     controller:
                                         controller.newPasswordAgainController,
-                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password again",
-                                    padding: EdgeInsets.all(20),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
                                     isPassword: true,
                                   ),
                                   CustomButton(
