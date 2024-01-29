@@ -10,4 +10,7 @@ class ProfileDetailsController extends GetxController {
   String role = "Admin";
 
   TextEditingController userNameController = TextEditingController();
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController newPasswordAgainController = TextEditingController();
 }

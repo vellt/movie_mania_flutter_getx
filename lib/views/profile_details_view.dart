@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/components/custom_bottom_sheet.dart';
+import 'package:movie_mania/components/custom_button.dart';
 import 'package:movie_mania/components/custom_list_tile.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/components/profile_picture.dart';
@@ -47,25 +49,23 @@ class ProfileDetailsView extends StatelessWidget {
                               color: Colors.blue,
                             ),
                             onPressed: () {
-                              Get.bottomSheet(Container(
-                                child: Column(
-                                  children: [
-                                    CustomTextField(
-                                        controller:
-                                            controller.userNameController,
-                                        prefixIcon:
-                                            Icon(Icons.person, size: 18),
-                                        labelText: "Username",
-                                        padding: EdgeInsets.zero,
-                                        isPassword: false),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFF272727),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    )),
+                              Get.bottomSheet(CustomBottomSheet(
+                                children: [
+                                  CustomTextField(
+                                    controller: controller.userNameController,
+                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    labelText: "Username",
+                                    padding: EdgeInsets.all(20),
+                                    isPassword: false,
+                                  ),
+                                  CustomButton(
+                                    background: Colors.blue,
+                                    text: "Save Changes",
+                                    onPressed: () {
+                                      print("hello");
+                                    },
+                                  ),
+                                ],
                               ));
                             },
                           )),
@@ -93,26 +93,52 @@ class ProfileDetailsView extends StatelessWidget {
                               Icons.edit,
                               color: Colors.blue,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.bottomSheet(CustomBottomSheet(
+                                children: [
+                                  CustomTextField(
+                                    controller:
+                                        controller.oldPasswordController,
+                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    labelText: "Current Password",
+                                    padding: EdgeInsets.all(20),
+                                    isPassword: true,
+                                  ),
+                                  CustomTextField(
+                                    controller:
+                                        controller.newPasswordController,
+                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    labelText: "new Password",
+                                    padding: EdgeInsets.all(20),
+                                    isPassword: true,
+                                  ),
+                                  CustomTextField(
+                                    controller:
+                                        controller.newPasswordAgainController,
+                                    prefixIcon: Icon(Icons.person, size: 18),
+                                    labelText: "new Password again",
+                                    padding: EdgeInsets.all(20),
+                                    isPassword: true,
+                                  ),
+                                  CustomButton(
+                                    background: Colors.blue,
+                                    text: "Save Changes",
+                                    onPressed: () {
+                                      print("hello");
+                                    },
+                                  ),
+                                ],
+                              ));
+                            },
                           )),
                       CustomListTile(
                           prefixIcon: Icons.accessibility,
                           mainTitle: "Role",
                           subTitle: "Admin"),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Container(
-                          width: double.infinity,
-                          child: CupertinoButton(
-                            padding: EdgeInsets.zero,
-                            color: Colors.red,
-                            child: Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Text("Delete Account"),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
+                      CustomButton(
+                        background: Colors.red,
+                        text: "Delete Account",
+                        onPressed: () {},
                       ),
                       CupertinoButton(
                         child: Text("Log out"),
