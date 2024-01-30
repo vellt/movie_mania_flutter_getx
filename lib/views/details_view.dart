@@ -85,7 +85,9 @@ class DetailsView extends StatelessWidget {
                               Text(
                                 controller.avg.toString(),
                                 style: TextStyle(
-                                    fontSize: 35, fontWeight: FontWeight.bold),
+                                    fontSize: 35,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 15,
@@ -93,6 +95,7 @@ class DetailsView extends StatelessWidget {
                               Icon(
                                 Icons.star,
                                 size: 35,
+                                color: Colors.black,
                               ),
                             ],
                           ),

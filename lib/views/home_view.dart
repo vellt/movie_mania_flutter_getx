@@ -63,11 +63,17 @@ class HomeView extends StatelessWidget {
                   ),
                   itemCount: controller.seriesList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        "http://localhost:3000/images/${controller.seriesList[index].image}",
-                        fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        controller
+                            .showDetailsView(controller.seriesList[index]);
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          "http://localhost:3000/images/${controller.seriesList[index].image}",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     );
                   }),

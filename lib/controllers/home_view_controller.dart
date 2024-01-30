@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
+import 'package:movie_mania/views/details_view.dart';
 import 'package:movie_mania/views/request_sender_view.dart';
 
 class HomeViewController extends GetxController {
@@ -36,5 +37,13 @@ class HomeViewController extends GetxController {
       print("error no response");
     }
     update();
+  }
+
+  void showDetailsView(Series series) {
+    Get.to(
+      DetailsView(),
+      arguments: series,
+      transition: Transition.cupertino,
+    );
   }
 }
