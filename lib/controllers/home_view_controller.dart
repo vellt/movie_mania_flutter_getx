@@ -18,7 +18,7 @@ class HomeViewController extends GetxController {
   }
 
   Future<void> loadData() async {
-    var response = await Get.to(RequestSenderView(),
+    var response = await Get.to(() => RequestSenderView(),
         transition: Transition.noTransition,
         arguments: {
           'method': Method.GET,
@@ -41,7 +41,7 @@ class HomeViewController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      DetailsView(),
+      () => DetailsView(),
       arguments: series,
       transition: Transition.cupertino,
     );

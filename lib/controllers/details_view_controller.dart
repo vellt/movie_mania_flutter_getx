@@ -11,7 +11,6 @@ class DetailsViewController extends GetxController {
     seasons = (Get.arguments as Series).season;
     coverImage =
         "http://localhost:3000/images/${(Get.arguments as Series).image}";
-    avg = (Get.arguments as Series).rating;
     update();
   }
 
