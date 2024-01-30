@@ -24,10 +24,10 @@ class RequestSenderView extends StatelessWidget {
                           padding: EdgeInsets.all(8.0),
                           child: Icon(Icons.cloud_off_outlined, size: 40),
                         ),
-                        Text("Something went wrong"),
+                        Text("Something went wrong :("),
                         CupertinoButton(
                           child: Text("Refresh"),
-                          onPressed: () {},
+                          onPressed: controller.sendRequest,
                         )
                       ],
                     ),
