@@ -5,19 +5,9 @@ import 'package:movie_mania/controllers/request_view_controller.dart';
 import 'package:movie_mania/models/method.dart';
 
 class RequestSenderView extends StatelessWidget {
-  Method method; // GET, PUT....
-  String route; // url
-  RequestSenderView({
-    required this.method,
-    required this.route,
-  });
-
   @override
   Widget build(BuildContext context) {
-    RequestViewController controller = Get.put(RequestViewController(
-      method: method,
-      route: route,
-    ));
+    RequestViewController controller = Get.put(RequestViewController());
 
     return GetBuilder<RequestViewController>(
         init: controller,

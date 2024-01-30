@@ -58,19 +58,23 @@ class HomeView extends StatelessWidget {
                   mainAxisSpacing: 20.0, // függ. térköz
                   childAspectRatio: 2.0 / 3.0, // képarány
                 ),
-                itemCount: controller.filmBoritoUrlList.length,
+                itemCount: controller.seriesList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      controller.filmBoritoUrlList[index],
+                      "http://localhost:3000/images/${controller.seriesList[index].image}",
                       fit: BoxFit.cover,
                     ),
                   );
                 }),
             floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
               onPressed: () {},
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           );
         });
