@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,8 +31,9 @@ class ProfileDetailsView extends StatelessWidget {
                   child: Column(
                     children: [
                       ProfilePicture(
+                          size: 120,
                           url:
-                              "http://localhost:3000/images/${controller.user.userImage}",
+                              "http://localhost:3000/images/${controller.user.userImage}?v=${Random().nextInt(100)}",
                           onTap: controller.loadPictureEdit),
                       SizedBox(
                         height: 30,
@@ -70,15 +73,14 @@ class ProfileDetailsView extends StatelessWidget {
                           subTitle: (controller.user.role == 0)
                               ? "Felhasználó"
                               : "Admin"),
+                      SizedBox(
+                        height: 10,
+                      ),
                       CustomButton(
                         background: Colors.red,
-                        text: "Delete Account",
-                        onPressed: controller.deleteAccount,
-                      ),
-                      CupertinoButton(
-                        child: Text("Log out"),
+                        text: "Log out",
                         onPressed: controller.logOut,
-                      )
+                      ),
                     ],
                   ),
                 ),

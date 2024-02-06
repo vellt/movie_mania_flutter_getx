@@ -11,7 +11,7 @@ class FirstController extends GetxController {
   TextEditingController loginEmailController =
       TextEditingController(text: "admin@admin.hu");
   TextEditingController loginPasswordController =
-      TextEditingController(text: "123456aA");
+      TextEditingController(text: "12345aA");
 
   // reg
   TextEditingController regEmailController = TextEditingController();

@@ -30,22 +30,12 @@ class SearchingView extends StatelessWidget {
             ),
             body: (controller.seriesList.length == 0)
                 ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search_off,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                        Text(
-                          "No results.",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      "No results.",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
                     ),
                   )
                 : GridView.builder(

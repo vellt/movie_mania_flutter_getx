@@ -11,8 +11,8 @@ dependencies:
     sdk: flutter
   get: ^4.6.5
   dotted_border: ^2.1.0
-  flut_grouped_buttons: ^0.0.9
   http: ^1.1.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:

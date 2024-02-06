@@ -59,11 +59,12 @@ class HomeController extends GetxController {
     );
   }
 
-  void showProfileView() {
-    Get.to(
+  void showProfileView() async {
+    await Get.to(
       () => ProfileDetailsView(),
       transition: Transition.cupertino,
       arguments: {"user": user},
     );
+    update();
   }
 }

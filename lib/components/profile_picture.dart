@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 class ProfilePicture extends StatelessWidget {
@@ -5,10 +8,13 @@ class ProfilePicture extends StatelessWidget {
     super.key,
     required this.url,
     required this.onTap,
+    this.filePath,
+    this.size,
   });
-
+  final Uint8List? filePath;
   final String url;
   final Function() onTap;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +24,23 @@ class ProfilePicture extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(url),
-            radius: 100,
+            backgroundImage: (filePath == null)
+                ? NetworkImage(url)
+                : Image.memory(filePath!).image,
+            radius: size ?? 100,
           ),
-          Container(
-            height: 50,
-            width: 50,
-            child: Icon(
-              Icons.edit,
-              color: Colors.white,
+          Padding(
+            padding: EdgeInsets.only(right: 5, bottom: 5),
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(50)),
             ),
-            decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(50)),
           )
         ],
       ),

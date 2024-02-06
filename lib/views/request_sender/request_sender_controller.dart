@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:http/http.dart' as http;
@@ -43,6 +42,20 @@ class RequestSenderController extends GetxController {
             'json': json.decode(response.body),
             'statusCode': response.statusCode
           });
+          break;
+        case Method.FILE:
+          List<int> body = (Get.arguments['body'] as Map)["path"] as List<int>;
+          var request = await http.MultipartRequest('PUT', Uri.parse(route))
+            ..files.add(await http.MultipartFile.fromBytes('image', body,
+                filename: 'image.jpg'));
+          var response = await request.send();
+          String json = await response.stream.bytesToString();
+          print(json);
+          Get.back(result: {
+            'json': json.replaceAll("\"", ""),
+            'statusCode': response.statusCode
+          });
+
           break;
         default:
           break;

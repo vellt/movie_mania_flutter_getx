@@ -28,15 +28,6 @@ class SeriesView extends StatelessWidget {
                         ),
                       ),
                       centerTitle: true,
-                      actions: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
                     ),
                     body: SingleChildScrollView(
                       child: Column(
