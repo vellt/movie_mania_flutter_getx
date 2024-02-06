@@ -4,15 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
-import 'package:movie_mania/controllers/details_view_controller.dart';
-import 'package:movie_mania/controllers/edit_details_view_controller.dart';
+import 'package:movie_mania/views/edit_series/edit_series_controller.dart';
 
-class EditDetailsView extends StatelessWidget {
-  EditDetailsViewController controller = Get.put(EditDetailsViewController());
+class EditSeriesView extends StatelessWidget {
+  EditSeriesController controller = Get.put(EditSeriesController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<EditDetailsViewController>(
+    return GetBuilder<EditSeriesController>(
         init: controller,
         builder: (_) {
           return Scaffold(

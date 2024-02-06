@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_mania/controllers/request_view_controller.dart';
+import 'package:movie_mania/views/request_sender/request_sender_controller.dart';
 import 'package:movie_mania/models/method.dart';
 
 class RequestSenderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    RequestViewController controller = Get.put(RequestViewController());
+    RequestSenderController controller = Get.put(RequestSenderController());
 
-    return GetBuilder<RequestViewController>(
+    return GetBuilder<RequestSenderController>(
         init: controller,
         builder: (_) {
           return Scaffold(

@@ -8,20 +8,21 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     required this.padding,
     required this.isPassword,
+    this.onSubmitted,
   });
   final Widget prefixIcon;
   final String labelText;
   final EdgeInsets padding;
   final TextEditingController controller;
   final bool isPassword;
-// EdgeInsets.only(top: 20, right: 20, left: 20)
-// Icon(Icons.movie)
-// "Name"
+  final Function(String)? onSubmitted;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
       child: TextField(
+        onSubmitted: onSubmitted,
         obscureText: isPassword,
         controller: controller,
         style: TextStyle(color: Colors.white),

@@ -14,6 +14,6 @@ void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData.dark(),
-    home: HomeView(),
+    home: FirstView(),
   ));
 }

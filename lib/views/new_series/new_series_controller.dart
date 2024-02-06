@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class NewSeriesViewController extends GetxController {
+class NewSeriesController extends GetxController {
   String title = "Moonlight";
   int seasons = 1;
   String coverImage = "https://media.port.hu/images/001/612/350x510/784.webp";

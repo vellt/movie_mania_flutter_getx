@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
-import 'package:movie_mania/controllers/details_view_controller.dart';
-import 'package:movie_mania/controllers/edit_details_view_controller.dart';
-import 'package:movie_mania/controllers/new_series_view_controller.dart';
+import 'package:movie_mania/views/series/series_view_controller.dart';
+import 'package:movie_mania/views/edit_series/edit_series_view_controller.dart';
+import 'package:movie_mania/views/new_series/new_series_controller.dart';
 
 class NewSeriesView extends StatelessWidget {
-  NewSeriesViewController controller = Get.put(NewSeriesViewController());
+  NewSeriesController controller = Get.put(NewSeriesController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewSeriesViewController>(
+    return GetBuilder<NewSeriesController>(
         init: controller,
         builder: (_) {
           return Scaffold(

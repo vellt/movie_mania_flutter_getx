@@ -1,19 +1,23 @@
 import 'package:get/get.dart';
+import 'package:movie_mania/views/first/first_controller.dart';
+import 'package:movie_mania/views/request_sender/request_sender_controller.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
-import 'package:movie_mania/views/details_view.dart';
-import 'package:movie_mania/views/request_sender_view.dart';
+import 'package:movie_mania/models/user.dart';
+import 'package:movie_mania/views/series/series_view.dart';
+import 'package:movie_mania/views/profile_details/profile_details_view.dart';
+import 'package:movie_mania/views/request_sender/request_sender_view.dart';
+import 'package:movie_mania/views/searching/search_view.dart';
 
-class HomeViewController extends GetxController {
+class HomeController extends GetxController {
   List<Series> seriesList = [];
-  String userName = "JohnDoe";
-  String profilePicture =
-      "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg";
+  User user = Get.arguments["user"] as User;
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
+    print("homeViewController");
+    Get.delete<FirstController>();
     loadData();
   }
 
@@ -24,7 +28,8 @@ class HomeViewController extends GetxController {
           'method': Method.GET,
           'route': "http://localhost:3000/series",
         });
-
+    Get.delete<RequestSenderController>();
+    print(response);
     if (response != null) {
       int statusCode = response['statusCode'] as int;
       if (statusCode == 200) {
@@ -41,9 +46,24 @@ class HomeViewController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      () => DetailsView(),
+      () => SeriesView(),
       arguments: series,
       transition: Transition.cupertino,
+    );
+  }
+
+  void showSearchingView() {
+    Get.to(
+      () => SearchView(),
+      transition: Transition.cupertino,
+    );
+  }
+
+  void showProfileView() {
+    Get.to(
+      () => ProfileDetailsView(),
+      transition: Transition.cupertino,
+      arguments: {"user": user},
     );
   }
 }

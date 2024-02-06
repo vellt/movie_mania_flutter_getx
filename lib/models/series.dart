@@ -16,7 +16,7 @@ class Series {
   // ha kívülről json adat érkezik azt képes legyen fogadni
   factory Series.fromJson(Map<String, dynamic> json) {
     return Series(
-      id: json['id'] as int,
+      id: json['seriesID'] as int,
       name: json['name'] as String,
       season: json['season'] as int,
       image: json['image'] as String,
