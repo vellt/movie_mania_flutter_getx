@@ -8,7 +8,6 @@ class RequestViewController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     sendRequest();
   }
@@ -28,10 +27,20 @@ class RequestViewController extends GetxController {
             'statusCode': response.statusCode
           });
           break;
+        case Method.POST:
+          Map body = Get.arguments['body'] as Map;
+          var response = await http.post(Uri.parse(route), body: body);
+          List<dynamic> jsonResponse = json.decode(response.body);
+          Get.back(result: {
+            'json': jsonResponse,
+            'statusCode': response.statusCode
+          });
+          break;
         default:
           break;
       }
     } catch (e) {
+      print(e);
       loading = false;
       update();
     }

@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: controller.showSearchView,
                       icon: Icon(
                         Icons.search,
                         size: 30,

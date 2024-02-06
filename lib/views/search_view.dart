@@ -18,15 +18,6 @@ class SearchView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.black,
               title: Text("Search"),
-              actions: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                      color: Colors.white,
-                    )),
-              ],
               bottom: PreferredSize(
                 preferredSize: Size(double.infinity, 60),
                 child: CustomTextField(
@@ -35,28 +26,33 @@ class SearchView extends StatelessWidget {
                   labelText: "Type some words..",
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   isPassword: false,
+                  onSubmitted: (_) => controller.loadData(),
                 ),
               ),
             ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.search_off,
-                    size: 50,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    "No results.",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
+            body: GridView.builder(
+                padding: EdgeInsets.all(20),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // oszlopok száma
+                  crossAxisSpacing: 20.0, // vízszintes térköz
+                  mainAxisSpacing: 20.0, // függ. térköz
+                  childAspectRatio: 2.0 / 3.0, // képarány
+                ),
+                itemCount: controller.seriesList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      controller.showDetailsView(controller.seriesList[index]);
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        "http://localhost:3000/images/${controller.seriesList[index].image}",
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
+                  );
+                }),
           );
         });
   }

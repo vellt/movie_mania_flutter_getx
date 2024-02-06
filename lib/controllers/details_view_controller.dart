@@ -1,22 +1,40 @@
 import 'package:get/get.dart';
+import 'package:movie_mania/controllers/request_view_controller.dart';
+import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
+import 'package:movie_mania/views/request_sender_view.dart';
 
 class DetailsViewController extends GetxController {
+  Series? series;
+
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
-    title = (Get.arguments as Series).name;
-    avg = (Get.arguments as Series).rating;
-    seasons = (Get.arguments as Series).season;
-    coverImage =
-        "http://localhost:3000/images/${(Get.arguments as Series).image}";
-    update();
+    loadData();
   }
 
-  String title = "Moonlight";
-  double avg = 2.5;
-  int rating = 0;
-  int seasons = 12;
-  String coverImage = "https://media.port.hu/images/001/612/350x510/784.webp";
+  Future<void> loadData() async {
+    int id = (Get.arguments as Series).id;
+
+    var response = await Get.to(() => RequestSenderView(),
+        transition: Transition.noTransition,
+        arguments: {
+          'method': Method.GET,
+          'route': "http://localhost:3000/series/$id",
+        });
+    print("response: $response");
+    Get.delete<RequestViewController>();
+    print(response);
+    if (response != null) {
+      int statusCode = response['statusCode'] as int;
+      if (statusCode == 200) {
+        var jsonData = response['json'] as List<dynamic>;
+        series = jsonData.map((e) => Series.fromJson(e)).toList()[0];
+        print(series!.id);
+      } else
+        print("error: Stats code $statusCode");
+    } else
+      print("error no response");
+    update();
+  }
 }

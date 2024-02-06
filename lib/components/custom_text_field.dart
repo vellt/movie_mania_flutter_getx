@@ -8,12 +8,14 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     required this.padding,
     required this.isPassword,
+    this.onSubmitted,
   });
   final Widget prefixIcon;
   final String labelText;
   final EdgeInsets padding;
   final TextEditingController controller;
   final bool isPassword;
+  final Function(String)? onSubmitted;
 // EdgeInsets.only(top: 20, right: 20, left: 20)
 // Icon(Icons.movie)
 // "Name"
@@ -22,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: padding,
       child: TextField(
+        onSubmitted: onSubmitted,
         obscureText: isPassword,
         controller: controller,
         style: TextStyle(color: Colors.white),

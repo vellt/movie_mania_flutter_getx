@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:movie_mania/controllers/request_view_controller.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
 import 'package:movie_mania/views/details_view.dart';
 import 'package:movie_mania/views/request_sender_view.dart';
+import 'package:movie_mania/views/search_view.dart';
 
 class HomeViewController extends GetxController {
   List<Series> seriesList = [];
@@ -12,7 +14,6 @@ class HomeViewController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     loadData();
   }
@@ -24,7 +25,7 @@ class HomeViewController extends GetxController {
           'method': Method.GET,
           'route': "http://localhost:3000/series",
         });
-
+    Get.delete<RequestViewController>();
     if (response != null) {
       int statusCode = response['statusCode'] as int;
       if (statusCode == 200) {
@@ -43,6 +44,13 @@ class HomeViewController extends GetxController {
     Get.to(
       () => DetailsView(),
       arguments: series,
+      transition: Transition.cupertino,
+    );
+  }
+
+  void showSearchView() {
+    Get.to(
+      () => SearchView(),
       transition: Transition.cupertino,
     );
   }
