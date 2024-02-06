@@ -6,7 +6,7 @@ import 'package:movie_mania/models/series.dart';
 import 'package:movie_mania/views/series/series_view.dart';
 import 'package:movie_mania/views/request_sender/request_sender_view.dart';
 
-class SearchController extends GetxController {
+class SearchingController extends GetxController {
   TextEditingController searchController = TextEditingController();
   List<Series> seriesList = [];
 

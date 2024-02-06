@@ -36,6 +36,14 @@ class RequestSenderController extends GetxController {
             'statusCode': response.statusCode
           });
           break;
+        case Method.PUT:
+          Map body = Get.arguments['body'] as Map;
+          var response = await http.put(Uri.parse(route), body: body);
+          Get.back(result: {
+            'json': json.decode(response.body),
+            'statusCode': response.statusCode
+          });
+          break;
         default:
           break;
       }

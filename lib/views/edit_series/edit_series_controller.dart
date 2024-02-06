@@ -22,7 +22,6 @@ class EditSeriesController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     titleController.text = title;
     titleController.addListener(() {

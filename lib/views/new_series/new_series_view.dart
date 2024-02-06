@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/views/series/series_view_controller.dart';
-import 'package:movie_mania/views/edit_series/edit_series_view_controller.dart';
+import 'package:movie_mania/views/edit_series/edit_series_controller.dart';
 import 'package:movie_mania/views/new_series/new_series_controller.dart';
 
 class NewSeriesView extends StatelessWidget {

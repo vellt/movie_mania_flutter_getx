@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_button.dart';
 import 'package:movie_mania/components/custom_list_tile.dart';
 import 'package:movie_mania/components/profile_picture.dart';
-import 'package:movie_mania/controllers/profile_details_controller.dart';
+import 'package:movie_mania/views/profile_details/profile_details_controller.dart';
 
 class ProfileDetailsView extends StatelessWidget {
   ProfileDetailsController controller = Get.put(ProfileDetailsController());

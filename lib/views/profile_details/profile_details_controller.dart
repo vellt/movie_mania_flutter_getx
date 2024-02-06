@@ -5,8 +5,11 @@ import 'package:movie_mania/components/custom_bottom_sheet.dart';
 import 'package:movie_mania/components/custom_button.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/components/profile_picture.dart';
+import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/user.dart';
-import 'package:movie_mania/views/first_view.dart';
+import 'package:movie_mania/views/first/first_view.dart';
+import 'package:movie_mania/views/request_sender/request_sender_controller.dart';
+import 'package:movie_mania/views/request_sender/request_sender_view.dart';
 
 class ProfileDetailsController extends GetxController {
   User user = Get.arguments["user"] as User;
@@ -16,12 +19,44 @@ class ProfileDetailsController extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController newPasswordAgainController = TextEditingController();
 
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    userNameController.text = user.username;
+  }
+
   void logOut() {
     Get.offAll(() => FirstView(), transition: Transition.cupertino);
   }
 
   void deleteAccount() {
     print(":(");
+  }
+
+  Future<bool> updateData(String url, Map body) async {
+    String uzenet = "";
+    bool result = false;
+    var response = await Get.to(() => RequestSenderView(),
+        transition: Transition.noTransition,
+        arguments: {'method': Method.PUT, 'route': url, 'body': body});
+    Get.delete<RequestSenderController>();
+    if (response != null) {
+      int statusCode = response['statusCode'] as int;
+      print(response['json']);
+      if (statusCode == 200) {
+        uzenet = response['json'];
+        result = true;
+      } else {
+        uzenet = "error: Stats code $statusCode";
+        result = false;
+      }
+    } else {
+      uzenet = "error no response";
+      result = false;
+    }
+    print(uzenet);
+    return result;
   }
 
   void loadPictureEdit() {
@@ -58,8 +93,16 @@ class ProfileDetailsController extends GetxController {
         CustomButton(
           background: Colors.blue,
           text: "Save Changes",
-          onPressed: () {
-            print("hello");
+          onPressed: () async {
+            bool result = await updateData(
+              "http://localhost:3000/editUsername/${user.email}",
+              {"username": userNameController.text},
+            );
+            if (result) {
+              user.username = userNameController.text;
+              update();
+            }
+            Get.back();
           },
         ),
       ],

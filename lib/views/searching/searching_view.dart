@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
-import 'package:movie_mania/views/searching/search_controller.dart';
+import 'package:movie_mania/views/searching/searching_controller.dart';
 
-class SearchView extends StatelessWidget {
+class SearchingView extends StatelessWidget {
   SearchingController controller = Get.put(SearchingController());
 
   @override
