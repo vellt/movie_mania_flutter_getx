@@ -6,8 +6,7 @@ class CustomBottomSheet extends StatelessWidget {
   CustomBottomSheet({required this.children});
   List<Widget> Function(CustomBottomSheetController) children;
 
-  CustomBottomSheetController controller =
-      Get.put(CustomBottomSheetController());
+  var controller = Get.put(CustomBottomSheetController());
 
   @override
   Widget build(BuildContext context) {

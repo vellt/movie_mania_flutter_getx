@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/series.dart';
-import 'package:movie_mania/views/series/series_view.dart';
+import 'package:movie_mania/views/series_details/series_details_view.dart';
 
 class SearchingController extends GetxController {
   TextEditingController searchController = TextEditingController();
@@ -29,7 +29,7 @@ class SearchingController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      () => SeriesView(),
+      () => SeriesDetailsView(),
       arguments: series,
       transition: Transition.cupertino,
     );

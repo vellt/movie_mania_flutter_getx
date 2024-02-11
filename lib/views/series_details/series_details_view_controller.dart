@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/series.dart';
 
-class SeriesViewController extends GetxController {
+class SeriesDetailsViewController extends GetxController {
   Series series = Series.empty();
   bool loading = true;
 
@@ -21,4 +21,6 @@ class SeriesViewController extends GetxController {
     loading = false;
     update();
   }
+
+  void sendRatingRequest() {}
 }

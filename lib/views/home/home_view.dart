@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/views/home/home_controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -52,7 +53,7 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: CircleAvatar(
                               backgroundImage: NetworkImage(
-                                  "http://localhost:3000/images/${controller.user.userImage}?v=${Random().nextInt(100)}"),
+                                  "${Backend.imageBaseUrl}${controller.user.userImage}?v=${Random().nextInt(100)}"),
                               radius: 20,
                             ),
                           ),

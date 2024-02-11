@@ -3,7 +3,7 @@ import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/views/first/first_controller.dart';
 import 'package:movie_mania/models/series.dart';
 import 'package:movie_mania/models/user.dart';
-import 'package:movie_mania/views/series/series_view.dart';
+import 'package:movie_mania/views/series_details/series_details_view.dart';
 import 'package:movie_mania/views/profile_details/profile_details_view.dart';
 import 'package:movie_mania/views/searching/searching_view.dart';
 
@@ -30,7 +30,7 @@ class HomeController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      () => SeriesView(),
+      () => SeriesDetailsView(),
       arguments: series,
       transition: Transition.cupertino,
     );

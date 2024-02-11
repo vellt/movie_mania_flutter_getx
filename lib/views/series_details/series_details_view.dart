@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_mania/views/series/series_view_controller.dart';
+import 'package:movie_mania/views/series_details/series_details_view_controller.dart';
 
-class SeriesView extends StatelessWidget {
-  SeriesViewController controller = Get.put(SeriesViewController());
+class SeriesDetailsView extends StatelessWidget {
+  SeriesDetailsViewController controller =
+      Get.put(SeriesDetailsViewController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SeriesViewController>(
+    return GetBuilder<SeriesDetailsViewController>(
         init: controller,
         builder: (_) {
           return (controller.loading)
