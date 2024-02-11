@@ -1,11 +1,6 @@
-import 'dart:math';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/components/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:movie_mania/components/custom_button.dart';
 import 'package:movie_mania/components/custom_list_tile.dart';

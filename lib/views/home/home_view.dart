@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/backend/backend.dart';
@@ -78,7 +77,7 @@ class HomeView extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                "http://localhost:3000/images/${controller.seriesList[index].image}",
+                                "${Backend.imageBaseUrl}${controller.seriesList[index].image}",
                                 fit: BoxFit.cover,
                               ),
                             ),

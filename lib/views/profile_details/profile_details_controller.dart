@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/profile_picture.dart';
-import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/user.dart';
 import 'package:movie_mania/views/first/first_view.dart';
 

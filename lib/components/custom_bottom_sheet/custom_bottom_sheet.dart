@@ -5,7 +5,6 @@ import 'package:movie_mania/components/custom_bottom_sheet/custom_bottom_sheet_c
 class CustomBottomSheet extends StatelessWidget {
   CustomBottomSheet({required this.children});
   List<Widget> Function(CustomBottomSheetController) children;
-
   var controller = Get.put(CustomBottomSheetController());
 
   @override
