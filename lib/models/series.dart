@@ -13,6 +13,16 @@ class Series {
     required this.rating,
   });
 
+  factory Series.empty() {
+    return Series(
+      id: 0,
+      name: "",
+      season: 0,
+      image: "",
+      rating: 0,
+    );
+  }
+
   // ha kívülről json adat érkezik azt képes legyen fogadni
   factory Series.fromJson(Map<String, dynamic> json) {
     return Series(

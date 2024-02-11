@@ -3,18 +3,22 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
+enum PictureMode { Memory, Network }
+
 class ProfilePicture extends StatelessWidget {
-  const ProfilePicture({
+  ProfilePicture({
     super.key,
     required this.url,
     required this.onTap,
-    this.filePath,
+    required this.filePath,
     this.size,
+    required this.pictureMode,
   });
-  final Uint8List? filePath;
-  final String url;
-  final Function() onTap;
-  final double? size;
+  String url; // NETWORK
+  Function() onTap;
+  Uint8List filePath; // MEMORY
+  double? size; // átméretezhető (opcionális)
+  PictureMode pictureMode;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,9 @@ class ProfilePicture extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            backgroundImage: (filePath == null)
+            backgroundImage: (pictureMode == PictureMode.Network)
                 ? NetworkImage(url)
-                : Image.memory(filePath!).image,
+                : Image.memory(filePath).image,
             radius: size ?? 100,
           ),
           Padding(

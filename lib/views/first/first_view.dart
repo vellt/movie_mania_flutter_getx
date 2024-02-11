@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
-import 'package:movie_mania/components/profile_picture.dart';
 import 'package:movie_mania/views/first/first_controller.dart';
 
 class FirstView extends StatelessWidget {

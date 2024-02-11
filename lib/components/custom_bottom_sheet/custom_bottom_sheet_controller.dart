@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class CustomBottomSheetController extends GetxController {
-  void UpdateScreen() {
+  void Update() {
     print("updated bottomsheet");
     this.update();
   }

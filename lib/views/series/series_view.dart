@@ -10,9 +10,10 @@ class SeriesView extends StatelessWidget {
     return GetBuilder<SeriesViewController>(
         init: controller,
         builder: (_) {
-          return (_.series == null)
+          return (controller.loading)
               ? Scaffold(
                   body: Center(child: CircularProgressIndicator()),
+                  backgroundColor: Colors.black,
                 )
               : RefreshIndicator(
                   onRefresh: controller.loadData,
