@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/views/series_details/series_details_view_controller.dart';
 
 class SeriesDetailsView extends StatelessWidget {
-  SeriesDetailsViewController controller =
-      Get.put(SeriesDetailsViewController());
+  SeriesDetailsViewController controller = Get.put(SeriesDetailsViewController());
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class SeriesDetailsView extends StatelessWidget {
         builder: (_) {
           return (controller.loading)
               ? Scaffold(
-                  body: Center(child: CircularProgressIndicator()),
+                  body: RefreshProgressIndicator(),
                   backgroundColor: Colors.black,
                 )
               : RefreshIndicator(
@@ -23,7 +23,7 @@ class SeriesDetailsView extends StatelessWidget {
                     appBar: AppBar(
                       backgroundColor: Colors.black,
                       title: Text(
-                        controller.series!.name,
+                        controller.series.name,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -41,7 +41,7 @@ class SeriesDetailsView extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Image.network(
-                                  "http://localhost:3000/images/${controller.series!.image}",
+                                  "${Backend.imageBaseUrl}${controller.series.image}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -83,10 +83,7 @@ class SeriesDetailsView extends StatelessWidget {
                                     children: [
                                       Text(
                                         controller.series!.rating.toString(),
-                                        style: TextStyle(
-                                            fontSize: 35,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
                                         width: 15,
@@ -103,8 +100,7 @@ class SeriesDetailsView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                left: 20, right: 20, top: 20, bottom: 35),
+                            padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 35),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

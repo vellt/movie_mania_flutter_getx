@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/views/searching/searching_controller.dart';
 
@@ -45,8 +46,7 @@ class SearchingView extends StatelessWidget {
                         )
                       : GridView.builder(
                           padding: EdgeInsets.all(20),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, // oszlopok száma
                             crossAxisSpacing: 20.0, // vízszintes térköz
                             mainAxisSpacing: 20.0, // függ. térköz
@@ -56,13 +56,12 @@ class SearchingView extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               onTap: () {
-                                controller.showDetailsView(
-                                    controller.seriesList[index]);
+                                controller.showDetailsView(controller.seriesList[index]);
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
-                                  "http://localhost:3000/images/${controller.seriesList[index].image}",
+                                  "${Backend.imageBaseUrl}${controller.seriesList[index].image}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
