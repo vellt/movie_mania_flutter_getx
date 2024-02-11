@@ -1,0 +1,7 @@
+{
+    "diffEditor.wordWrap": "inherit",
+    "debug.console.wordWrap": true,
+    "editor.wordWrapColumn": 80,
+    "editor.wordWrap": "off",
+    "workbench.settings.useSplitJSON": false
+}

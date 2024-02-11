@@ -28,7 +28,7 @@ class ProfileDetailsController extends GetxController {
   }
 
   String getProfilePictureUrl() {
-    return "${Backend.imageBaseUrl}${user.userImage}?v=${Random().nextInt(100)}";
+    return "${Backend.imageBaseUrl}${user.userImage}?v=${Random().nextInt(1000)}";
   }
 
   Future readImage() async {

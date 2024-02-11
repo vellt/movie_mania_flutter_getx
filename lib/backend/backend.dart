@@ -12,8 +12,7 @@ class Backend {
   }
 
   // json listát ad vissza (login, reg)
-  static Future<List<dynamic>> POST(
-      {required String route, required Map body}) async {
+  static Future<List<dynamic>> POST({required String route, required Map body}) async {
     var response = await http.post(Uri.parse(baseUrl + route), body: body);
     return json.decode(response.body) as List<dynamic>;
   }
@@ -26,11 +25,9 @@ class Backend {
 
   // kép elérését adja vissza (file upload)
   // body paramétere image
-  static Future<String> FILE(
-      {required String route, required List<int> image}) async {
+  static Future<String> FILE({required String route, required List<int> image}) async {
     var request = await http.MultipartRequest('PUT', Uri.parse(baseUrl + route))
-      ..files.add(await http.MultipartFile.fromBytes('image', image,
-          filename: 'image.jpg'));
+      ..files.add(await http.MultipartFile.fromBytes('image', image, filename: 'image.jpg'));
     var response = await request.send();
     String json = await response.stream.bytesToString();
     return json.replaceAll("\"", "");

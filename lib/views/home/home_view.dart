@@ -30,9 +30,7 @@ class HomeView extends StatelessWidget {
                             "Account",
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
-                          Text(controller.user.username,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white))
+                          Text(controller.user.username, style: TextStyle(fontSize: 20, color: Colors.white))
                         ],
                       ),
                       actions: [
@@ -51,8 +49,7 @@ class HomeView extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "${Backend.imageBaseUrl}${controller.user.userImage}?v=${Random().nextInt(100)}"),
+                              backgroundImage: NetworkImage("${Backend.imageBaseUrl}${controller.user.userImage}?v=${Random().nextInt(1000)}"),
                               radius: 20,
                             ),
                           ),
@@ -71,8 +68,7 @@ class HomeView extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {
-                              controller.showDetailsView(
-                                  controller.seriesList[index]);
+                              controller.showDetailsView(controller.seriesList[index]);
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),

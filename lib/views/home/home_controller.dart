@@ -50,6 +50,7 @@ class HomeController extends GetxController {
       arguments: {"user": user},
     );
     // módosulthattak az adatok mikor visszatért
+    print(user.userImage);
     update();
   }
 }
