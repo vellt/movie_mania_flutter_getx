@@ -1,39 +1,30 @@
 import 'package:get/get.dart';
-import 'package:movie_mania/controllers/request_view_controller.dart';
-import 'package:movie_mania/models/method.dart';
+import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/series.dart';
+import 'package:movie_mania/models/user.dart';
+import 'package:movie_mania/views/first/first_controller.dart';
+import 'package:movie_mania/views/profile_details/profile_details_view.dart';
 import 'package:movie_mania/views/series_details/series_details_view.dart';
-import 'package:movie_mania/views/request_sender_view.dart';
 import 'package:movie_mania/views/searching/searching_view.dart';
 
 class HomeController extends GetxController {
   List<Series> seriesList = [];
-  String userName = "JohnDoe";
-  String profilePicture = "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg";
+  User user = Get.arguments as User;
+  bool loading = true;
 
   @override
   void onReady() {
     super.onReady();
+    Get.delete<FirstController>(); // betölt a home akkor törli a first (login/reg nézetet)
     loadData();
   }
 
   Future<void> loadData() async {
-    var response = await Get.to(() => RequestSenderView(), transition: Transition.noTransition, arguments: {
-      'method': Method.GET,
-      'route': "http://localhost:3000/series",
-    });
-    Get.delete<RequestViewController>();
-    if (response != null) {
-      int statusCode = response['statusCode'] as int;
-      if (statusCode == 200) {
-        var jsonData = response['json'] as List<dynamic>;
-        seriesList = jsonData.map((e) => Series.fromJson(e)).toList();
-      } else {
-        print("error: Stats code $statusCode");
-      }
-    } else {
-      print("error no response");
-    }
+    loading = true;
+    update();
+    List<dynamic> response = await Backend.Get(route: "/series");
+    seriesList = response.map((e) => Series.fromJson(e)).toList();
+    loading = false;
     update();
   }
 
@@ -50,5 +41,15 @@ class HomeController extends GetxController {
       () => SearchingView(),
       transition: Transition.cupertino,
     );
+  }
+
+  void showProfileDetailsView() async {
+    await Get.to(
+      () => ProfileDetailsView(),
+      arguments: user,
+      transition: Transition.cupertino,
+    );
+    // módosulthatnak az adatok mikor visszatérünk
+    update();
   }
 }

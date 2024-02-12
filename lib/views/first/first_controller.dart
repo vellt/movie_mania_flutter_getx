@@ -36,7 +36,7 @@ class FirstController extends GetxController {
       if (users.length != 0) {
         Get.offAll(
           () => HomeView(),
-          arguments: {"user": users[0]},
+          arguments: users[0],
           transition: Transition.cupertino,
         );
       }
@@ -54,7 +54,7 @@ class FirstController extends GetxController {
     if (users.length != 0) {
       Get.offAll(
         () => HomeView(),
-        arguments: {"user": users[0]},
+        arguments: users[0],
         transition: Transition.cupertino,
       );
     }

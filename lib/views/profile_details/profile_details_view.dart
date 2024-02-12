@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_mania/components/custom_bottom_sheet.dart';
+import 'package:movie_mania/components/custom_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:movie_mania/components/custom_button.dart';
 import 'package:movie_mania/components/custom_list_tile.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/components/profile_picture.dart';
-import 'package:movie_mania/controllers/profile_details_controller.dart';
+import 'package:movie_mania/views/profile_details/profile_details_controller.dart';
 
 class ProfileDetailsView extends StatelessWidget {
   ProfileDetailsController controller = Get.put(ProfileDetailsController());
@@ -72,8 +72,7 @@ class ProfileDetailsView extends StatelessWidget {
                                     controller: controller.userNameController,
                                     prefixIcon: Icon(Icons.person, size: 18),
                                     labelText: "Username",
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     isPassword: false,
                                   ),
                                   CustomButton(
@@ -87,10 +86,7 @@ class ProfileDetailsView extends StatelessWidget {
                               ));
                             },
                           )),
-                      CustomListTile(
-                          prefixIcon: Icons.mail,
-                          mainTitle: "Email",
-                          subTitle: "admin@admin.com"),
+                      CustomListTile(prefixIcon: Icons.mail, mainTitle: "Email", subTitle: "admin@admin.com"),
                       CustomListTile(
                           prefixIcon: Icons.date_range,
                           mainTitle: "Birth Date",
@@ -141,8 +137,7 @@ class ProfileDetailsView extends StatelessWidget {
                               Get.bottomSheet(CustomBottomSheet(
                                 children: [
                                   CustomTextField(
-                                    controller:
-                                        controller.oldPasswordController,
+                                    controller: controller.oldPasswordController,
                                     prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "Current Password",
                                     padding: EdgeInsets.symmetric(
@@ -152,8 +147,7 @@ class ProfileDetailsView extends StatelessWidget {
                                     isPassword: true,
                                   ),
                                   CustomTextField(
-                                    controller:
-                                        controller.newPasswordController,
+                                    controller: controller.newPasswordController,
                                     prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password",
                                     padding: EdgeInsets.symmetric(
@@ -163,8 +157,7 @@ class ProfileDetailsView extends StatelessWidget {
                                     isPassword: true,
                                   ),
                                   CustomTextField(
-                                    controller:
-                                        controller.newPasswordAgainController,
+                                    controller: controller.newPasswordAgainController,
                                     prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password again",
                                     padding: EdgeInsets.symmetric(
@@ -184,10 +177,7 @@ class ProfileDetailsView extends StatelessWidget {
                               ));
                             },
                           )),
-                      CustomListTile(
-                          prefixIcon: Icons.accessibility,
-                          mainTitle: "Role",
-                          subTitle: "Admin"),
+                      CustomListTile(prefixIcon: Icons.accessibility, mainTitle: "Role", subTitle: "Admin"),
                       CustomButton(
                         background: Colors.red,
                         text: "Delete Account",
