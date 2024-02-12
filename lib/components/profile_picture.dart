@@ -1,14 +1,24 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
+enum PictureMode { Memory, Network }
+
 class ProfilePicture extends StatelessWidget {
-  const ProfilePicture({
+  ProfilePicture({
     super.key,
     required this.url,
     required this.onTap,
+    required this.imageMemoryData,
+    this.size, // opcionális
+    required this.pictureMode,
   });
 
-  final String url;
-  final Function() onTap;
+  String url; // NETWORK
+  Function() onTap; // képre való kattintási esemény
+  Uint8List imageMemoryData; // MEMORY
+  double? size; // null értékű mert opcionális
+  PictureMode pictureMode;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +28,8 @@ class ProfilePicture extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(url),
-            radius: 100,
+            backgroundImage: (pictureMode == PictureMode.Network) ? NetworkImage(url) : Image.memory(imageMemoryData).image,
+            radius: size ?? 100,
           ),
           Container(
             height: 50,
@@ -28,8 +38,7 @@ class ProfilePicture extends StatelessWidget {
               Icons.edit,
               color: Colors.white,
             ),
-            decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(50)),
+            decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(50)),
           )
         ],
       ),

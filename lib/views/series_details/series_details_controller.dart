@@ -4,7 +4,7 @@ import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
 import 'package:movie_mania/views/request_sender_view.dart';
 
-class DetailsViewController extends GetxController {
+class SeriesDetailsController extends GetxController {
   Series? series;
 
   @override
@@ -16,12 +16,10 @@ class DetailsViewController extends GetxController {
   Future<void> loadData() async {
     int id = (Get.arguments as Series).id;
 
-    var response = await Get.to(() => RequestSenderView(),
-        transition: Transition.noTransition,
-        arguments: {
-          'method': Method.GET,
-          'route': "http://localhost:3000/series/$id",
-        });
+    var response = await Get.to(() => RequestSenderView(), transition: Transition.noTransition, arguments: {
+      'method': Method.GET,
+      'route': "http://localhost:3000/series/$id",
+    });
     print("response: $response");
     Get.delete<RequestViewController>();
     print(response);

@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:movie_mania/controllers/request_view_controller.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
-import 'package:movie_mania/views/details_view.dart';
+import 'package:movie_mania/views/series_details/series_details_view.dart';
 import 'package:movie_mania/views/request_sender_view.dart';
 
-class SearchViewController extends GetxController {
+class SearchingController extends GetxController {
   @override
   void onReady() {
     super.onReady();
@@ -18,13 +18,11 @@ class SearchViewController extends GetxController {
   List<Series> seriesList = [];
 
   Future<void> loadData() async {
-    var response = await Get.to(() => RequestSenderView(),
-        transition: Transition.noTransition,
-        arguments: {
-          'method': Method.POST,
-          'route': "http://localhost:3000/searching",
-          'body': {"searching": searchController.text}
-        });
+    var response = await Get.to(() => RequestSenderView(), transition: Transition.noTransition, arguments: {
+      'method': Method.POST,
+      'route': "http://localhost:3000/searching",
+      'body': {"searching": searchController.text}
+    });
     Get.delete<RequestViewController>();
     if (response != null) {
       int statusCode = response['statusCode'] as int;
@@ -42,7 +40,7 @@ class SearchViewController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      () => DetailsView(),
+      () => SeriesDetailsView(),
       arguments: series,
       transition: Transition.cupertino,
     );

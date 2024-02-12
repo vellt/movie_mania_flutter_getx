@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
 import 'package:movie_mania/components/profile_picture.dart';
-import 'package:movie_mania/controllers/first_view_controller.dart';
+import 'package:movie_mania/views/first/first_controller.dart';
 
 class FirstView extends StatelessWidget {
   const FirstView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    FirstViewController controller = Get.put(FirstViewController());
+    FirstController controller = Get.put(FirstController());
     return DefaultTabController(
       length: 2,
       child: Builder(builder: (context) {
@@ -21,7 +21,7 @@ class FirstView extends StatelessWidget {
           index = (_.indexIsChanging) ? _.index : _.animation!.value.round();
           print(index);
         });
-        return GetBuilder<FirstViewController>(
+        return GetBuilder<FirstController>(
             init: controller,
             builder: (_) {
               return Scaffold(
@@ -41,12 +41,10 @@ class FirstView extends StatelessWidget {
                         tabAlignment: TabAlignment.center,
                         tabs: [
                           Tab(
-                            child:
-                                Text("Login", style: TextStyle(fontSize: 20)),
+                            child: Text("Login", style: TextStyle(fontSize: 20)),
                           ),
                           Tab(
-                            child: Text("Registration",
-                                style: TextStyle(fontSize: 20)),
+                            child: Text("Registration", style: TextStyle(fontSize: 20)),
                           ),
                         ],
                       ),
@@ -60,16 +58,14 @@ class FirstView extends StatelessWidget {
                               controller: controller.loginEmailController,
                               prefixIcon: Icon(Icons.mail, size: 18),
                               labelText: "Email",
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               isPassword: false,
                             ),
                             CustomTextField(
                               controller: controller.loginPasswordController,
                               prefixIcon: Icon(Icons.lock, size: 18),
                               labelText: "Password",
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               isPassword: true,
                             ),
                             FlutGroupedButtons(
@@ -106,32 +102,28 @@ class FirstView extends StatelessWidget {
                                   controller: controller.regEmailController,
                                   prefixIcon: Icon(Icons.mail, size: 18),
                                   labelText: "Email",
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                   isPassword: false,
                                 ),
                                 CustomTextField(
                                   controller: controller.regPwdController,
                                   prefixIcon: Icon(Icons.lock, size: 18),
                                   labelText: "Password",
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                   isPassword: true,
                                 ),
                                 CustomTextField(
                                   controller: controller.regPwd2Controller,
                                   prefixIcon: Icon(Icons.lock, size: 18),
                                   labelText: "Password again",
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                   isPassword: true,
                                 ),
                                 CustomTextField(
                                   controller: controller.regUsernameController,
                                   prefixIcon: Icon(Icons.person, size: 18),
                                   labelText: "Username",
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                   isPassword: false,
                                 ),
                                 Padding(
@@ -140,8 +132,7 @@ class FirstView extends StatelessWidget {
                                     horizontal: 20,
                                   ),
                                   child: ListTile(
-                                    leading: Text("BirthDate",
-                                        style: TextStyle(fontSize: 20)),
+                                    leading: Text("BirthDate", style: TextStyle(fontSize: 20)),
                                     trailing: Icon(Icons.date_range),
                                   ),
                                 ),

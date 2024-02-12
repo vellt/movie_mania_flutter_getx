@@ -2,15 +2,14 @@ import 'package:get/get.dart';
 import 'package:movie_mania/controllers/request_view_controller.dart';
 import 'package:movie_mania/models/method.dart';
 import 'package:movie_mania/models/series.dart';
-import 'package:movie_mania/views/details_view.dart';
+import 'package:movie_mania/views/series_details/series_details_view.dart';
 import 'package:movie_mania/views/request_sender_view.dart';
-import 'package:movie_mania/views/search_view.dart';
+import 'package:movie_mania/views/searching/searching_view.dart';
 
-class HomeViewController extends GetxController {
+class HomeController extends GetxController {
   List<Series> seriesList = [];
   String userName = "JohnDoe";
-  String profilePicture =
-      "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg";
+  String profilePicture = "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg";
 
   @override
   void onReady() {
@@ -19,12 +18,10 @@ class HomeViewController extends GetxController {
   }
 
   Future<void> loadData() async {
-    var response = await Get.to(() => RequestSenderView(),
-        transition: Transition.noTransition,
-        arguments: {
-          'method': Method.GET,
-          'route': "http://localhost:3000/series",
-        });
+    var response = await Get.to(() => RequestSenderView(), transition: Transition.noTransition, arguments: {
+      'method': Method.GET,
+      'route': "http://localhost:3000/series",
+    });
     Get.delete<RequestViewController>();
     if (response != null) {
       int statusCode = response['statusCode'] as int;
@@ -42,7 +39,7 @@ class HomeViewController extends GetxController {
 
   void showDetailsView(Series series) {
     Get.to(
-      () => DetailsView(),
+      () => SeriesDetailsView(),
       arguments: series,
       transition: Transition.cupertino,
     );
@@ -50,7 +47,7 @@ class HomeViewController extends GetxController {
 
   void showSearchView() {
     Get.to(
-      () => SearchView(),
+      () => SearchingView(),
       transition: Transition.cupertino,
     );
   }

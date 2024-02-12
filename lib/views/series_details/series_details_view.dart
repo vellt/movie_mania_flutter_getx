@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_mania/controllers/details_view_controller.dart';
+import 'package:movie_mania/views/series_details/series_details_controller.dart';
 
-class DetailsView extends StatelessWidget {
-  DetailsViewController controller = Get.put(DetailsViewController());
+class SeriesDetailsView extends StatelessWidget {
+  SeriesDetailsController controller = Get.put(SeriesDetailsController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DetailsViewController>(
+    return GetBuilder<SeriesDetailsController>(
         init: controller,
         builder: (_) {
           return (controller.series == null)
@@ -91,10 +91,7 @@ class DetailsView extends StatelessWidget {
                                     children: [
                                       Text(
                                         controller.series!.rating.toString(),
-                                        style: TextStyle(
-                                            fontSize: 35,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
                                         width: 15,
@@ -111,8 +108,7 @@ class DetailsView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                left: 20, right: 20, top: 20, bottom: 35),
+                            padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 35),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_mania/controllers/home_view_controller.dart';
+import 'package:movie_mania/views/home/home_controller.dart';
 
 class HomeView extends StatelessWidget {
-  HomeViewController controller = Get.put(HomeViewController());
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeViewController>(
+    return GetBuilder<HomeController>(
         init: controller,
         builder: (_) {
           return RefreshIndicator(
@@ -23,8 +23,7 @@ class HomeView extends StatelessWidget {
                       "Account",
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
-                    Text(controller.userName,
-                        style: TextStyle(fontSize: 20, color: Colors.white))
+                    Text(controller.userName, style: TextStyle(fontSize: 20, color: Colors.white))
                   ],
                 ),
                 actions: [
@@ -45,8 +44,7 @@ class HomeView extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(controller.profilePicture),
+                        backgroundImage: NetworkImage(controller.profilePicture),
                         radius: 20,
                       ),
                     ),
@@ -65,8 +63,7 @@ class HomeView extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        controller
-                            .showDetailsView(controller.seriesList[index]);
+                        controller.showDetailsView(controller.seriesList[index]);
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),

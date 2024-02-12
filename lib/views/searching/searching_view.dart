@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/components/custom_text_field.dart';
-import 'package:movie_mania/controllers/home_view_controller.dart';
-import 'package:movie_mania/controllers/search_view_controller.dart';
+import 'package:movie_mania/views/home/home_controller.dart';
+import 'package:movie_mania/views/searching/searching_controller.dart';
 
-class SearchView extends StatelessWidget {
-  SearchViewController controller = Get.put(SearchViewController());
+class SearchingView extends StatelessWidget {
+  SearchingController controller = Get.put(SearchingController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchViewController>(
+    return GetBuilder<SearchingController>(
         init: controller,
         builder: (_) {
           return Scaffold(
