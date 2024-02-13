@@ -103,48 +103,17 @@ class SeriesDetailsView extends StatelessWidget {
                             padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 35),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
+                              children: List.generate(
+                                controller.icons.length,
+                                (index) => IconButton(
                                   onPressed: () {},
                                   iconSize: 40,
                                   icon: Icon(
-                                    Icons.star_border,
+                                    controller.icons[index],
                                     color: Colors.yellow,
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ],

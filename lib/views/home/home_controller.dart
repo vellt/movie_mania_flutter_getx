@@ -31,7 +31,7 @@ class HomeController extends GetxController {
   void showDetailsView(Series series) {
     Get.to(
       () => SeriesDetailsView(),
-      arguments: series,
+      arguments: {"series": series, "user": user},
       transition: Transition.cupertino,
     );
   }
@@ -39,6 +39,7 @@ class HomeController extends GetxController {
   void showSearchingView() {
     Get.to(
       () => SearchingView(),
+      arguments: user,
       transition: Transition.cupertino,
     );
   }

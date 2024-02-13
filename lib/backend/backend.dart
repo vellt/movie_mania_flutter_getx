@@ -8,6 +8,7 @@ class Backend {
   // json listát ad vissza (user, series)
   static Future<List<dynamic>> GET({required String route}) async {
     var response = await http.get(Uri.parse(baseUrl + route));
+
     return json.decode(response.body) as List<dynamic>;
   }
 
@@ -18,9 +19,14 @@ class Backend {
   }
 
   // üzenetet ad vissza (edit profile)
-  static Future<String> PUT({required String route, required Map body}) async {
-    var response = await http.put(Uri.parse(baseUrl + route), body: body);
-    return json.decode(response.body) as String;
+  static Future<String> PUT({required String route, Map? body}) async {
+    if (body != null) {
+      var response = await http.put(Uri.parse(baseUrl + route), body: body);
+      return json.decode(response.body) as String;
+    } else {
+      var response = await http.put(Uri.parse(baseUrl + route));
+      return response.body;
+    }
   }
 
   // kép elérését adja vissza (file upload)

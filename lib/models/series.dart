@@ -4,6 +4,7 @@ class Series {
   int season;
   String image;
   double rating;
+  int userRating;
 
   Series({
     required this.id,
@@ -11,6 +12,7 @@ class Series {
     required this.season,
     required this.image,
     required this.rating,
+    required this.userRating,
   });
 
   factory Series.empty() {
@@ -20,18 +22,13 @@ class Series {
       season: 0,
       image: "",
       rating: 0,
+      userRating: 0,
     );
   }
 
   // ha kívülről json adat érkezik azt képes legyen fogadni
   factory Series.fromJson(Map<String, dynamic> json) {
-    return Series(
-      id: json['seriesID'] as int,
-      name: json['name'] as String,
-      season: json['season'] as int,
-      image: json['image'] as String,
-      rating: json['rating'] as double,
-    );
+    return Series(id: json['seriesID'] as int, name: json['name'] as String, season: json['season'] as int, image: json['image'] as String, rating: json['rating'] as double, userRating: json['userRating'] == null ? 0 : json['userRating'] as int);
   }
 
   // kifelé tudjunk JSON-t küldeni az adatainkból
@@ -42,6 +39,7 @@ class Series {
       "season": season,
       "image": image,
       "rating": rating,
+      "userRating": userRating,
     };
   }
 }

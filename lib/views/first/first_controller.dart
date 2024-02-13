@@ -6,10 +6,8 @@ import 'package:movie_mania/views/home/home_view.dart';
 
 class FirstController extends GetxController {
   // login
-  TextEditingController loginEmailController =
-      TextEditingController(text: "admin@admin.hu");
-  TextEditingController loginPasswordController =
-      TextEditingController(text: "12345aA");
+  TextEditingController loginEmailController = TextEditingController(text: "admin@admin.hu");
+  TextEditingController loginPasswordController = TextEditingController(text: "123456aA");
 
   // reg
   TextEditingController regEmailController = TextEditingController();

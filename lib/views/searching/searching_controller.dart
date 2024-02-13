@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/series.dart';
+import 'package:movie_mania/models/user.dart';
 import 'package:movie_mania/views/series_details/series_details_view.dart';
 
 class SearchingController extends GetxController {
@@ -28,9 +29,10 @@ class SearchingController extends GetxController {
   }
 
   void showDetailsView(Series series) {
+    User user = Get.arguments as User;
     Get.to(
       () => SeriesDetailsView(),
-      arguments: series,
+      arguments: {"series": series, "user": user},
       transition: Transition.cupertino,
     );
   }
