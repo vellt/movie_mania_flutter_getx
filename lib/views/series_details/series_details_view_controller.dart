@@ -5,10 +5,18 @@ import 'package:movie_mania/models/series.dart';
 import 'package:movie_mania/models/user.dart';
 
 class SeriesDetailsViewController extends GetxController {
-  Series series = Series.empty();
-  List<IconData> icons = [];
+  Series series = (Get.arguments["series"] as Series);
+  User user = (Get.arguments["user"] as User);
+  List<IconData> icons = [
+    Icons.star_border,
+    Icons.star_border,
+    Icons.star_border,
+    Icons.star_border,
+    Icons.star_border,
+  ];
 
   bool loading = true;
+  bool expanded = false;
 
   @override
   void onReady() {
@@ -19,9 +27,7 @@ class SeriesDetailsViewController extends GetxController {
   Future<void> loadData() async {
     loading = true;
     update();
-    int seriesId = (Get.arguments["series"] as Series).id;
-    int userId = (Get.arguments["user"] as User).userid;
-    List<dynamic> response = await Backend.GET(route: "/seriesMobil/$seriesId/$userId");
+    List<dynamic> response = await Backend.GET(route: "/seriesMobil/${series.id}/${user.userid}");
     series = response.map((e) => Series.fromJson(e)).toList()[0];
     loading = false;
     makeStarList();
@@ -29,22 +35,18 @@ class SeriesDetailsViewController extends GetxController {
   }
 
   void makeStarList() {
-    icons = [];
-    print(series.userRating);
-    for (int i = 1; i <= 5; i++) {
-      if (i <= series.userRating) {
-        icons.add(Icons.star);
+    for (int i = 0; i < 5; i++) {
+      if (i < series.userRating) {
+        icons[i] = (Icons.star);
       } else {
-        icons.add(Icons.star_border);
+        icons[i] = (Icons.star_border);
       }
     }
   }
 
-/*
   void sendRatingRequest(int index) async {
-    int seriesId = (Get.arguments["series"] as Series).id;
-    int userId = (Get.arguments["user"] as User).userid;
-    await Backend.PUT(route: "/ratingMobil/$seriesId/$userId", body: {"rating": index});
+    await Backend.PUT(route: "/ratingMobil/${series.id}/${user.userid}", body: {"rating": (index + 1).toString()});
+    expanded = true;
     loadData();
-  }*/
+  }
 }

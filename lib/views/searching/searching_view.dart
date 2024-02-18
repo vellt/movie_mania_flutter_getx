@@ -45,6 +45,7 @@ class SearchingView extends StatelessWidget {
                           ),
                         )
                       : GridView.builder(
+                          physics: BouncingScrollPhysics(),
                           padding: EdgeInsets.all(20),
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, // oszlopok száma

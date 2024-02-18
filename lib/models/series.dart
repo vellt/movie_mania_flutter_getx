@@ -28,7 +28,8 @@ class Series {
 
   // ha kívülről json adat érkezik azt képes legyen fogadni
   factory Series.fromJson(Map<String, dynamic> json) {
-    return Series(id: json['seriesID'] as int, name: json['name'] as String, season: json['season'] as int, image: json['image'] as String, rating: json['rating'] as double, userRating: json['userRating'] == null ? 0 : json['userRating'] as int);
+    print(json);
+    return Series(id: json['seriesID'] as int, name: json['name'] as String, season: json['season'] as int, image: json['image'] as String, rating: double.parse(json['rating'].toString()), userRating: json['userRating'] == null ? 0 : json['userRating'] as int);
   }
 
   // kifelé tudjunk JSON-t küldeni az adatainkból

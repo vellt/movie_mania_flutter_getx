@@ -15,12 +15,14 @@ class User {
     required this.birthday,
   });
 
+  bool isAdmin() {
+    return (role == 1);
+  }
+
   // ha kívülről json adat érkezik azt képes legyen fogadni
   factory User.fromJson(Map<String, dynamic> json) {
     print(json);
-    DateTime date = json['birthday'] == null
-        ? DateTime.now()
-        : DateTime.parse(json['birthday'] as String);
+    DateTime date = json['birthday'] == null ? DateTime.now() : DateTime.parse(json['birthday'] as String);
     print(date);
     return User(
       userid: json['userID'] as int,
@@ -34,13 +36,6 @@ class User {
 
   // kifelé tudjunk JSON-t küldeni az adatainkból
   Map<String, dynamic> toJson() {
-    return {
-      "userid": userid,
-      "email": email,
-      "username": username,
-      "role": role,
-      "userImage": userImage,
-      "birthday": birthday
-    };
+    return {"userid": userid, "email": email, "username": username, "role": role, "userImage": userImage, "birthday": birthday};
   }
 }

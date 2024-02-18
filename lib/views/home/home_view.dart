@@ -28,9 +28,9 @@ class HomeView extends StatelessWidget {
                         children: [
                           Text(
                             "Account",
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 14.0, color: Colors.grey),
                           ),
-                          Text(controller.user.username, style: TextStyle(fontSize: 20, color: Colors.white))
+                          Text(controller.user.username, style: TextStyle(fontSize: 20.0, color: Colors.white))
                         ],
                       ),
                       actions: [
@@ -38,25 +38,26 @@ class HomeView extends StatelessWidget {
                             onPressed: controller.showSearchingView,
                             icon: Icon(
                               Icons.search,
-                              size: 30,
+                              size: 30.0,
                               color: Colors.white,
                             )),
                         SizedBox(
-                          width: 10,
+                          width: 10.0,
                         ),
                         GestureDetector(
                           onTap: controller.showProfileView,
                           child: Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10.0),
                             child: CircleAvatar(
                               backgroundImage: NetworkImage("${Backend.imageBaseUrl}${controller.user.userImage}?v=${Random().nextInt(1000)}"),
-                              radius: 20,
+                              radius: 20.0,
                             ),
                           ),
                         ),
                       ],
                     ),
                     body: GridView.builder(
+                        physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.all(20),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // oszlopok száma
@@ -71,7 +72,7 @@ class HomeView extends StatelessWidget {
                               controller.showDetailsView(controller.seriesList[index]);
                             },
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
                                 "${Backend.imageBaseUrl}${controller.seriesList[index].image}",
                                 fit: BoxFit.cover,
