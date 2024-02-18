@@ -23,15 +23,18 @@ class HomeView extends StatelessWidget {
                     backgroundColor: Colors.black,
                     appBar: AppBar(
                       backgroundColor: Colors.black,
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Account",
-                            style: TextStyle(fontSize: 14.0, color: Colors.grey),
-                          ),
-                          Text(controller.user.username, style: TextStyle(fontSize: 20.0, color: Colors.white))
-                        ],
+                      title: Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Account",
+                              style: TextStyle(fontSize: 14.0, color: Colors.grey),
+                            ),
+                            Text(controller.user.username, style: TextStyle(fontSize: 20.0, color: Colors.white))
+                          ],
+                        ),
                       ),
                       actions: [
                         IconButton(
@@ -41,9 +44,6 @@ class HomeView extends StatelessWidget {
                               size: 30.0,
                               color: Colors.white,
                             )),
-                        SizedBox(
-                          width: 10.0,
-                        ),
                         GestureDetector(
                           onTap: controller.showProfileView,
                           child: Padding(
@@ -54,6 +54,7 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(width: 10),
                       ],
                     ),
                     body: GridView.builder(

@@ -45,6 +45,8 @@ class SeriesDetailsViewController extends GetxController {
   }
 
   void sendRatingRequest(int index) async {
+    loading = true;
+    update();
     await Backend.PUT(route: "/ratingMobil/${series.id}/${user.userid}", body: {"rating": (index + 1).toString()});
     expanded = true;
     loadData();

@@ -32,6 +32,7 @@ class SeriesDetailsView extends StatelessWidget {
                       centerTitle: true,
                     ),
                     body: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Padding(
