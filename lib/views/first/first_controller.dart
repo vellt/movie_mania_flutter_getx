@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/user.dart';
 import 'package:movie_mania/views/home/home_view.dart';
@@ -25,6 +26,12 @@ class FirstController extends GetxController {
     }
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    loadUser();
+  }
+
   void reg() async {
     if (regPwdController.text == regPwd2Controller.text) {
       List response = await Backend.POST(route: "/regMobil", body: {
@@ -34,9 +41,11 @@ class FirstController extends GetxController {
       });
       List users = response.map((e) => User.fromJson(e)).toList();
       if (users.length != 0) {
+        // sikeres reg
+        saveMyMail(regEmailController.text);
         Get.offAll(
           () => HomeView(),
-          arguments: users[0],
+          arguments: {"user": users[0]},
           transition: Transition.cupertino,
         );
       }
@@ -51,10 +60,44 @@ class FirstController extends GetxController {
       "password": loginPasswordController.text,
     });
     List users = response.map((e) => User.fromJson(e)).toList();
+    // amikor a length nem 0
+    if (users.length != 0) {
+      // sikeres bejeltkezés
+      saveMyMail(loginEmailController.text);
+      Get.offAll(
+        () => HomeView(),
+        arguments: {"user": users[0]}, // az első elem a talált felhasználó
+        transition: Transition.cupertino,
+      );
+    }
+  }
+
+  // sikeres login/reg után elmenti az email címemet
+  void saveMyMail(String mail) {
+    final box = GetStorage();
+    box.write("email", mail);
+  }
+
+  // keresi, hogy van-e lementve email adat
+  // kinyeri, hogy van-e olyan felhasználó, aki már
+  // egyszer bejelentkezett, de még nem jelentkezett ki
+  void loadUser() async {
+    final box = GetStorage();
+    print("loading user data");
+    if (await box.hasData("email")) {
+      String mail = await box.read("email");
+      loginWithEmail(mail);
+    }
+  }
+
+  // automatikusan bejelentkeztet egy felhasználót
+  void loginWithEmail(String mail) async {
+    List response = await Backend.Get(route: '/getUserMobil/$mail');
+    List users = response.map((e) => User.fromJson(e)).toList();
     if (users.length != 0) {
       Get.offAll(
         () => HomeView(),
-        arguments: users[0],
+        arguments: {"user": users[0]},
         transition: Transition.cupertino,
       );
     }

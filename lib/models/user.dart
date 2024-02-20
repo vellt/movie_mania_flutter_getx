@@ -28,6 +28,8 @@ class User {
     );
   }
 
+  bool isAdmin() => (role == 1);
+
   Map<String, dynamic> toJson() {
     return {
       "userID": userid,

@@ -13,6 +13,7 @@ dependencies:
   dotted_border: ^2.1.0
   http: ^1.1.0
   image_picker: ^1.0.7
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:

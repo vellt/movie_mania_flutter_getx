@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/views/series_details/series_details_controller.dart';
 
 class SeriesDetailsView extends StatelessWidget {
@@ -10,10 +11,10 @@ class SeriesDetailsView extends StatelessWidget {
     return GetBuilder<SeriesDetailsController>(
         init: controller,
         builder: (_) {
-          return (controller.series == null)
+          return (controller.loading)
               ? Scaffold(
-                  backgroundColor: Colors.black,
                   body: Center(child: CircularProgressIndicator()),
+                  backgroundColor: Colors.black,
                 )
               : RefreshIndicator(
                   onRefresh: controller.loadData,
@@ -22,26 +23,93 @@ class SeriesDetailsView extends StatelessWidget {
                     appBar: AppBar(
                       backgroundColor: Colors.black,
                       title: Text(
-                        controller.series!.name,
+                        controller.series.name,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),
                       ),
                       centerTitle: true,
-                      actions: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
                     ),
                     body: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       child: Column(
                         children: [
+                          Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: ExpansionTile(
+                              title: Text("About the series"),
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            controller.series!.season.toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 60,
+                                            ),
+                                          ),
+                                          Text(
+                                            "seasons",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.yellow,
+                                          borderRadius: BorderRadius.circular(40),
+                                        ),
+                                        height: 80,
+                                        width: 150,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              controller.series!.rating.toString(),
+                                              style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 35,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                controller.user.isAdmin()
+                                    ? Container()
+                                    : Padding(
+                                        padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 35),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: List.generate(
+                                            controller.icons.length,
+                                            (index) => IconButton(
+                                              onPressed: () => controller.sendratingRequest(index),
+                                              icon: Icon(controller.icons[index], color: Colors.yellow),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsets.all(20),
                             child: AspectRatio(
@@ -49,110 +117,10 @@ class SeriesDetailsView extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Image.network(
-                                  "http://localhost:3000/images/${controller.series!.image}",
+                                  "${Backend.imageBaseUrl}${controller.series.image}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      controller.series!.season.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 60,
-                                      ),
-                                    ),
-                                    Text(
-                                      "seasons",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.yellow,
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  height: 80,
-                                  width: 150,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        controller.series!.rating.toString(),
-                                        style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        size: 35,
-                                        color: Colors.black,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 35),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  iconSize: 40,
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ],

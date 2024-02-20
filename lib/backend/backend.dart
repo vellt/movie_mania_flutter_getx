@@ -14,13 +14,15 @@ class Backend {
 
   // json listát ad vissza (login, reg)
   static Future<List<dynamic>> POST({required String route, required Map body}) async {
-    var response = await http.post(Uri.parse(baseUrl + route), body: body);
+    Map<String, String> headers = {"Content-type": "application/json"};
+    var response = await http.post(Uri.parse(baseUrl + route), body: jsonEncode(body), headers: headers);
     return json.decode(response.body) as List<dynamic>;
   }
 
   // üzenetet ad vissza (edit profile)
   static Future<String> PUT({required String route, required Map body}) async {
-    var response = await http.put(Uri.parse(baseUrl + route), body: body);
+    Map<String, String> headers = {"Content-type": "application/json"};
+    var response = await http.put(Uri.parse(baseUrl + route), body: jsonEncode(body), headers: headers);
     return json.decode(response.body) as String;
   }
 

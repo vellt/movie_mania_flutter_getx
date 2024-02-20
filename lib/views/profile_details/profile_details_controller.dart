@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,10 @@ class ProfileDetailsController extends GetxController {
     dateTime = user.birthday;
   }
 
+  String getProfilePictureUrl() {
+    return "${Backend.imageBaseUrl}${user.userImage}?v=${Random().nextInt(1000)}";
+  }
+
   Future readImage() async {
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file != null) {
@@ -40,7 +45,7 @@ class ProfileDetailsController extends GetxController {
   void sendEditImageRequest() async {
     if (imageData.isEmpty != true) {
       String response = await Backend.FILE(
-        route: "/editUserImageMobil",
+        route: "/editUserImageMobil/${user.email}",
         image: imageData,
       );
       user.userImage = response;
@@ -49,9 +54,9 @@ class ProfileDetailsController extends GetxController {
     }
   }
 
-  void sendUsernameRequest() async {
+  void sendEditUsernameRequest() async {
     String uzenet = await Backend.PUT(
-      route: "/editBirthday/${user.email}",
+      route: "/editUsername/${user.email}",
       body: {"username": userNameController.text},
     );
     print(uzenet); // backend válasz kiírása
@@ -84,6 +89,8 @@ class ProfileDetailsController extends GetxController {
   }
 
   void logOut() {
+    // ### final box = GetStorage();
+    // ### box.remove("email");
     Get.offAll(() => FirstView(), transition: Transition.cupertino);
   }
 }

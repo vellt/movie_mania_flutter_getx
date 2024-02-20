@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:get/get.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/models/series.dart';
@@ -9,7 +11,7 @@ import 'package:movie_mania/views/searching/searching_view.dart';
 
 class HomeController extends GetxController {
   List<Series> seriesList = [];
-  User user = Get.arguments as User;
+  User user = Get.arguments["user"] as User;
   bool loading = true;
 
   @override
@@ -19,6 +21,7 @@ class HomeController extends GetxController {
     loadData();
   }
 
+  // kezdeti sorozat adatokat betölti
   Future<void> loadData() async {
     loading = true;
     update();
@@ -28,17 +31,21 @@ class HomeController extends GetxController {
     update();
   }
 
+  // amikor egy sorozatra rákattintok
+  // betöltődnek az adatai + hogy arra a sorozatra mennyi csillagot adtam
   void showDetailsView(Series series) {
     Get.to(
       () => SeriesDetailsView(),
-      arguments: series,
+      arguments: {"series": series, "user": user},
       transition: Transition.cupertino,
     );
   }
 
+  // kereső, ennek is át kell adnom a user adatait
   void showSearchView() {
     Get.to(
       () => SearchingView(),
+      arguments: {"user": user},
       transition: Transition.cupertino,
     );
   }
@@ -46,10 +53,14 @@ class HomeController extends GetxController {
   void showProfileDetailsView() async {
     await Get.to(
       () => ProfileDetailsView(),
-      arguments: user,
+      arguments: {"user": user},
       transition: Transition.cupertino,
     );
     // módosulthatnak az adatok mikor visszatérünk
     update();
+  }
+
+  String getProfilePictureUrl() {
+    return "${Backend.imageBaseUrl}${user.userImage}?v=${Random().nextInt(1000)}";
   }
 }
