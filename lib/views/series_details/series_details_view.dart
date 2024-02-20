@@ -38,6 +38,7 @@ class SeriesDetailsView extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(20.0),
                             child: ExpansionTile(
+                              initiallyExpanded: controller.expanded,
                               title: Text("About the series"),
                               children: [
                                 Padding(
@@ -49,7 +50,7 @@ class SeriesDetailsView extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            controller.series!.season.toString(),
+                                            controller.series.season.toString(),
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 60,
@@ -75,7 +76,7 @@ class SeriesDetailsView extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              controller.series!.rating.toString(),
+                                              controller.series.rating.toString(),
                                               style: TextStyle(fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(

@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <user-permission android:name="android.permission.INTERNET"/>
+    <user-permission android:name="android.permission.CAMERA"/>
+    <user-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <user-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:label="movie_mania"
         android:name="${applicationName}"

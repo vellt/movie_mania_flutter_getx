@@ -55,7 +55,7 @@ class FirstController extends GetxController {
   }
 
   void login() async {
-    List response = await Backend.POST(route: "/loginMobil", body: {
+    List response = await Backend.POST(route: "/loginMobile", body: {
       "email": loginEmailController.text,
       "password": loginPasswordController.text,
     });

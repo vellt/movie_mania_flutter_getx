@@ -16,6 +16,7 @@ class Backend {
   static Future<List<dynamic>> POST({required String route, required Map body}) async {
     Map<String, String> headers = {"Content-type": "application/json"};
     var response = await http.post(Uri.parse(baseUrl + route), body: jsonEncode(body), headers: headers);
+    print(response.body);
     return json.decode(response.body) as List<dynamic>;
   }
 

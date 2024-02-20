@@ -31,23 +31,30 @@ class ProfileDetailsView extends StatelessWidget {
                   child: Column(
                     children: [
                       ProfilePicture(
-                        url: controller.profilePictureSource,
+                        imageMemoryData: controller.imageMemoryData,
+                        pictureMode: PictureMode.Network,
+                        url: controller.getProfilePictureUrl(),
+                        size: 120,
                         onTap: () {
+                          controller.mode = PictureMode.Network; // kezdőérték
                           Get.bottomSheet(CustomBottomSheet(
-                            children: [
+                            children: (bottomSheetController) => [
                               Padding(
                                 padding: EdgeInsets.all(20),
                                 child: ProfilePicture(
-                                  url: controller.profilePictureSource,
-                                  onTap: () {},
+                                  pictureMode: controller.mode, // vagy network vagy memory
+                                  imageMemoryData: controller.imageMemoryData,
+                                  url: controller.getProfilePictureUrl(),
+                                  onTap: () async {
+                                    await controller.readImage();
+                                    bottomSheetController.update();
+                                  },
                                 ),
                               ),
                               CustomButton(
                                 background: Colors.blue,
                                 text: "Save Changes",
-                                onPressed: () {
-                                  print("hello");
-                                },
+                                onPressed: controller.sendEditImageRequest,
                               ),
                             ],
                           ));
@@ -59,15 +66,12 @@ class ProfileDetailsView extends StatelessWidget {
                       CustomListTile(
                           prefixIcon: Icons.person,
                           mainTitle: "Username",
-                          subTitle: "@JohnDoe",
+                          subTitle: "@${controller.user.username}",
                           iconButton: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.blue,
-                            ),
+                            icon: Icon(Icons.edit, color: Colors.blue),
                             onPressed: () {
                               Get.bottomSheet(CustomBottomSheet(
-                                children: [
+                                children: (_) => [
                                   CustomTextField(
                                     controller: controller.userNameController,
                                     prefixIcon: Icon(Icons.person, size: 18),
@@ -78,19 +82,21 @@ class ProfileDetailsView extends StatelessWidget {
                                   CustomButton(
                                     background: Colors.blue,
                                     text: "Save Changes",
-                                    onPressed: () {
-                                      print("hello");
-                                    },
+                                    onPressed: controller.sendEditUsernameRequest,
                                   ),
                                 ],
                               ));
                             },
                           )),
-                      CustomListTile(prefixIcon: Icons.mail, mainTitle: "Email", subTitle: "admin@admin.com"),
+                      CustomListTile(
+                        prefixIcon: Icons.mail,
+                        mainTitle: "Email",
+                        subTitle: controller.user.email,
+                      ),
                       CustomListTile(
                           prefixIcon: Icons.date_range,
                           mainTitle: "Birth Date",
-                          subTitle: "2024-01-23",
+                          subTitle: controller.user.birthday.toString().split(' ')[0],
                           iconButton: IconButton(
                             icon: Icon(
                               Icons.edit,
@@ -99,25 +105,23 @@ class ProfileDetailsView extends StatelessWidget {
                             onPressed: () {
                               Get.bottomSheet(
                                 CustomBottomSheet(
-                                  children: [
+                                  children: (_) => [
                                     SizedBox(
                                       height: 200,
                                       child: CupertinoDatePicker(
-                                        initialDateTime: DateTime.now(),
+                                        initialDateTime: controller.user.birthday,
                                         mode: CupertinoDatePickerMode.date,
                                         dateOrder: DatePickerDateOrder.ymd,
                                         use24hFormat: true,
                                         onDateTimeChanged: (date) {
-                                          // controller.setNewDate(date);
+                                          controller.dateTime = date;
                                         },
                                       ),
                                     ),
                                     CustomButton(
                                       background: Colors.blue,
                                       text: "Save Changes",
-                                      onPressed: () {
-                                        print("hello");
-                                      },
+                                      onPressed: controller.sendEditDateRequest,
                                     ),
                                   ],
                                 ),
@@ -135,57 +139,38 @@ class ProfileDetailsView extends StatelessWidget {
                             ),
                             onPressed: () {
                               Get.bottomSheet(CustomBottomSheet(
-                                children: [
+                                children: (_) => [
                                   CustomTextField(
-                                    controller: controller.oldPasswordController,
-                                    prefixIcon: Icon(Icons.lock, size: 18),
-                                    labelText: "Current Password",
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    isPassword: true,
-                                  ),
-                                  CustomTextField(
-                                    controller: controller.newPasswordController,
+                                    controller: controller.pwdController,
                                     prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password",
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     isPassword: true,
                                   ),
                                   CustomTextField(
-                                    controller: controller.newPasswordAgainController,
+                                    controller: controller.pwd2Controller,
                                     prefixIcon: Icon(Icons.lock, size: 18),
                                     labelText: "new Password again",
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     isPassword: true,
                                   ),
                                   CustomButton(
                                     background: Colors.blue,
                                     text: "Save Changes",
-                                    onPressed: () {
-                                      print("hello");
-                                    },
+                                    onPressed: controller.sendEditPwdRequest,
                                   ),
                                 ],
                               ));
                             },
                           )),
-                      CustomListTile(prefixIcon: Icons.accessibility, mainTitle: "Role", subTitle: "Admin"),
-                      CustomButton(
-                        background: Colors.red,
-                        text: "Delete Account",
-                        onPressed: () {},
+                      CustomListTile(
+                        prefixIcon: Icons.accessibility,
+                        mainTitle: "Role",
+                        subTitle: controller.user.role == 0 ? "Felhasználó" : "Admin",
                       ),
                       CupertinoButton(
                         child: Text("Log out"),
-                        onPressed: () {},
+                        onPressed: controller.logOut,
                       )
                     ],
                   ),

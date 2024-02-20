@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:movie_mania/backend/backend.dart';
 import 'package:movie_mania/components/profile_picture.dart';
@@ -89,8 +90,8 @@ class ProfileDetailsController extends GetxController {
   }
 
   void logOut() {
-    // ### final box = GetStorage();
-    // ### box.remove("email");
+    final box = GetStorage();
+    box.remove("email");
     Get.offAll(() => FirstView(), transition: Transition.cupertino);
   }
 }
